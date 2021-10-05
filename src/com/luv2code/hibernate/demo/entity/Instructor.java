@@ -1,6 +1,7 @@
 package com.luv2code.hibernate.demo.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -103,5 +104,16 @@ public class Instructor {
                 ", instructorDetail=" + instructorDetail +
                 ", courses=" + courses +
                 '}';
+    }
+
+    // add convenience method for bi-directional relationship
+    public void addCourse(Course course) {
+        if (course == null){
+            courses = new ArrayList<>();
+        }
+        courses.add(course);
+
+        // setup bi-directional relationship, hey course this is your new instructor
+        course.setInstructor(this);
     }
 }
